@@ -1,0 +1,26 @@
+package lab2;
+
+public class Employee {
+ String name;
+ int id;
+ double salary;
+ Employee (String name,int id,double salary)
+ {
+	 this.name=name;
+	  this.id=id;
+	  this.salary=salary;
+ }
+ void displayDetails()
+ {
+	 System.out.println("ID of  Employee:"+id);
+	 System.out.println("Name of  Employee:+name");
+	 System.out.println("Salary of Employee:"+salary);
+	 System.out.println("+++++++++++++++++++++++++");
+ }
+ void increaseSalary(double percentage)
+ {
+	 double increment=(salary*percentage)/100;
+	 salary=salary+increment;
+    System.out.println(name+"salary increased by"+percentage+"%");
+}		 
+}
