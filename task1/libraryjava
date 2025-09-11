@@ -1,0 +1,97 @@
+package libraryManagementSystem;
+import java.util.*;
+
+public class Library {
+
+
+	
+	
+	    private Map<String, Book> books = new HashMap<>();
+	    private Scanner input = new Scanner(System.in);
+
+	    public void addBook(Book book) {
+	        books.put(book.getIsbn(), book);
+	    }
+
+	    public boolean issueBook(String isbn) {
+	        Book book = books.get(isbn);
+	        return book != null && book.issueBook();
+	    }
+
+	    public boolean returnBook(String isbn) {
+	        Book book = books.get(isbn);
+	        return book != null && book.returnBook();
+	    }
+
+	    public void showAllBooks() {
+	        for (Book book : books.values()) {
+	            book.display();
+	        }
+	    }
+
+	    public void start() {
+	        
+
+	        while (true) {
+	            System.out.println("\n=== Library Menu ===");
+	            System.out.println("1. Add Book");
+	            System.out.println("2. Issue Book");
+	            System.out.println("3. Return Book");
+	            System.out.println("4. Show All Books");
+	            System.out.println("5. Exit");
+	            System.out.print("Choose an option: ");
+	            int option = input.nextInt();
+	            input.nextLine();
+
+	            switch (option) {
+	                case 1:
+	                    System.out.print("Enter title: ");
+	                    String title = input.nextLine();
+	                    System.out.print("Enter author: ");
+	                    String author = input.nextLine();
+	                    System.out.print("Enter ISBN: ");
+	                    String isbn = input.nextLine();
+	                    addBook(new Book(title, author, isbn));
+	                    System.out.println("Book added!");
+	                    break;
+
+	                case 2:
+	                    System.out.print("Enter ISBN to issue: ");
+	                    isbn = input.nextLine();
+	                    if (issueBook(isbn)) {
+	                        System.out.println("Book issued.");
+	                    } else {
+	                        System.out.println("Book not available.");
+	                    }
+	                    break;
+
+	                case 3:
+	                    System.out.print("Enter ISBN to return: ");
+	                    isbn = input.nextLine();
+	                    if (returnBook(isbn)) {
+	                        System.out.println("Book returned.");
+	                    } else {
+	                        System.out.println("Invalid return.");
+	                    }
+	                    break;
+
+	                case 4:
+	                    showAllBooks();
+	                    break;
+
+	                case 5:
+	                    System.out.println("Exiting...");
+	                    input.close();
+	                    return;
+
+	                default:
+	                    System.out.println("Invalid option.");
+	            }
+	        }
+	    }
+
+	    public static void main(String[] args) {
+	        new Library().start();
+	    }
+	}
+
