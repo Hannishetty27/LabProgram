@@ -1,0 +1,41 @@
+package libraryManagementSystem;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class Test {
+	
+
+	    Library library;
+	    Book book;
+
+	    @BeforeEach
+	    void setUp() {
+	        library = new Library();
+	        book = new Book("Test Book", "Test Author", "T001");
+	        library.addBook(book);
+	    }
+
+	
+	    void testIssueBook() {
+	        assertTrue(library.issueBook("T001"));
+	        assertFalse(book.isAvailable());
+	    }
+
+	    private void assertFalse(boolean available) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	
+	    void testReturnBook() {
+	        library.issueBook("T001");
+	        assertTrue(library.returnBook("T001"));
+	        assertTrue(book.isAvailable());
+	    }
+
+	   
+	    void testAvailability() {
+	        assertTrue(book.isAvailable());
+	    }
+	}
