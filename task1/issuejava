@@ -1,0 +1,10 @@
+package libraryManagementSystem;
+
+public interface Issue {
+
+	    boolean issueBook();
+	    boolean returnBook();
+	    boolean isAvailable();
+	}
+
+	
