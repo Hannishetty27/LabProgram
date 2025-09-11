@@ -1,0 +1,41 @@
+package libraryManagementSystem;
+
+	public class Book implements Issue {
+	    private String title;
+	    private String author;
+	    private String isbn;
+	    private boolean available;
+
+	    public Book(String title, String author, String isbn) {
+	        this.title = title;
+	        this.author = author;
+	        this.isbn = isbn;
+	        this.available = true;
+	    }
+
+	    @Override
+	    public boolean issueBook() {
+	        if (available) {
+	            available = false;
+	            return true;
+	        }
+	        return false;
+	    }
+
+	    @Override
+	    public boolean returnBook() {
+	        if (!available) {
+	            available = true;
+	            return true;
+	        }
+	        return false;
+	    }
+
+	    @Override
+	    public boolean isAvailable() {
+	        return available;
+	    }
+
+	    public String getIsbn() {
+	        return isbn;
+	    }
