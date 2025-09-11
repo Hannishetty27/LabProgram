@@ -39,3 +39,14 @@ package libraryManagementSystem;
 	    public String getIsbn() {
 	        return isbn;
 	    }
+   public void display1() {
+	        System.out.println(title + " by " + author + " | ISBN: " + isbn + " | " + (available ? "Available" : "Issued"));
+	    }
+	
+
+	    public void display() {
+	        System.out.println(title + " by " + author + " | ISBN: " + isbn + " | " + (available ? "Available" : "Issued"));
+	    }
+	}
+
+
