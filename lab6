@@ -1,0 +1,145 @@
+CODE: 
+package bankdemo; 
+public class Account { 
+private int accountNo; 
+private String name; 
+private double balance; 
+// Constructor 
+public Account(int accountNo, String name, double balance) { 
+this.accountNo = accountNo; 
+this.name = name; 
+this.balance = balance; 
+} 
+// Deposit method 
+public void deposit(double amount) { 
+if (amount <= 0) { 
+throw new ArithmeticException("Deposit amount cannot be zero or negative."); 
+} 
+balance += amount; 
+System.out.println("Deposited: " + amount); 
+} 
+// Withdraw method 
+public void withdraw(double amount) throws InsufficientBalanceException { 
+if (amount <= 0) { 
+throw new ArithmeticException("Withdrawal amount cannot be zero or negative."); 
+} 
+if (amount > balance) { 
+throw new InsufficientBalanceException("Insufficient balance for withdrawal!"); 
+} 
+balance -= amount; 
+System.out.println("Withdrawn: " + amount); 
+} 
+// Show Balance 
+public void showBalance() { 
+System.out.println("Account No: " + accountNo + ", Name: " + name + ", Balance: " + balance); 
+} 
+} 
+package bankdemo; 
+//Custom Exception 
+public class InsufficientBalanceException extends Exception { 
+public InsufficientBalanceException(String message) { 
+super(message); 
+} 
+} 
+package bankdemo;
+import java.util.InputMismatchException; 
+import java.util.Scanner; 
+public class BankDemo { 
+public static void main(String[] args) { 
+Scanner sc = new Scanner(System.in);
+// Create one account 
+Account acc = new Account(1001, "John Doe", 5000); 
+while (true) { 
+try { 
+System.out.println("\n--- Banking Menu ---"); 
+System.out.println("1. Deposit"); 
+System.out.println("2. Withdraw"); 
+System.out.println("3. Show Balance"); 
+System.out.println("4. Exit"); 
+System.out.print("Enter your choice: "); 
+int choice = sc.nextInt(); 
+switch (choice) { 
+case 1: 
+System.out.print("Enter amount to deposit: "); 
+acc.deposit(sc.nextDouble()); 
+break; 
+case 2: 
+System.out.print("Enter amount to withdraw: "); 
+acc.withdraw(sc.nextDouble()); 
+break; 
+case 3: 
+acc.showBalance();
+break; CS2002-1 (Object Oriented Programming) 5 | P a g e 
+
+case 4: 
+System.out.println("Thank you! Exiting..."); 
+sc.close(); 
+System.exit(0); 
+default: 
+System.out.println("Invalid choice. Try again."); 
+} 
+} 
+catch (InputMismatchException e) { 
+System.out.println("Invalid input! Please enter numbers only."); 
+sc.nextLine(); // clear input buffer 
+} 
+catch (InsufficientBalanceException e) { 
+System.out.println("Error: " + e.getMessage()); 
+} 
+catch (ArithmeticException e) { 
+System.out.println("Error: " + e.getMessage()); 
+} 
+catch (Exception e) { 
+System.out.println("Unexpected error: " + e); 
+} 
+} 
+}
+
+OUTPUT: 
+--- Banking Menu --- 
+1. Deposit 
+2. Withdraw 
+3. Show Balance 
+4. Exit 
+Enter your choice: 1 
+Enter amount to deposit: 1000 
+Deposited: 1000.0 
+--- Banking Menu --- 
+1. Deposit 
+2. Withdraw 
+3. Show Balance 
+4. Exit 
+Enter your choice: 2 
+Enter amount to withdraw: 500 
+Withdrawn: 500.0 
+--- Banking Menu --- 
+1. Deposit 
+2. Withdraw 
+3. Show Balance 
+4. Exit 
+Enter your choice: 1 
+Enter amount to deposit: abc 
+Invalid input! Please enter numbers only. 
+--- Banking Menu –
+1. Deposit 
+2. Withdraw 
+3. Show Balance 
+4. Exit 
+Enter your choice: 1 
+Enter amount to deposit: -900 
+Error: Deposit amount cannot be zero or negative. 
+--- Banking Menu --- 
+1. Deposit 
+2. Withdraw 
+3. Show Balance 
+4. Exit 
+Enter your choice: 3 
+Account No: 1001, Name: John Doe, Balance: 5500.0 
+--- Banking Menu --- 
+1. Deposit 
+2. Withdraw 
+3. Show Balance 
+4. Exit 
+Enter your choice: 4 
+Thank you! Exiting...
+
